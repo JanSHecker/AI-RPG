@@ -210,7 +210,7 @@
   }
 
   .play-stage {
-    @apply grid gap-5 xl:min-h-0 xl:grid-rows-[auto_minmax(0,1fr)_auto] xl:overflow-hidden;
+    @apply grid gap-5 xl:min-h-0 xl:grid-rows-[minmax(0,1fr)_auto] xl:overflow-hidden;
   }
 
   .play-rail {
@@ -219,10 +219,6 @@
 
   .play-rail-stretch {
     @apply xl:min-h-0 xl:grid-rows-[auto_auto_minmax(0,1fr)];
-  }
-
-  .play-stage-toolbar {
-    @apply flex items-center;
   }
 
   .play-section {

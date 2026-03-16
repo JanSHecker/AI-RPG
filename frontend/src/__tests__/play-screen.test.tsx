@@ -139,7 +139,7 @@ describe('PlayScreen', () => {
 
     expect((await screen.findAllByText('Oakheart Village')).length).toBeGreaterThanOrEqual(1)
     expect((await screen.findByText('2026-03-12T10:00:00')).closest('article')).toHaveClass('play-terminal-entry')
-    expect(screen.getByRole('button', { name: /^back$/i })).toBeInTheDocument()
+    expect(screen.getByTestId('play-terminal-panel')).toContainElement(screen.getByRole('button', { name: /^back$/i }))
     expect(screen.queryByText('Live Session')).not.toBeInTheDocument()
     expect(screen.queryByText('Quick Actions')).not.toBeInTheDocument()
     expect(screen.getByTestId('play-status-rail')).toHaveClass('play-rail-stretch')

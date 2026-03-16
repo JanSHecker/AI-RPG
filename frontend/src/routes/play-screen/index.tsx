@@ -1,9 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
-import { ArrowLeft } from 'lucide-react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Button } from '../../components/ui/button'
 import { getSaveSnapshot } from '../../lib/api'
-import { playScreenClassNames } from './constants'
 import { MissingSaveState } from './components/missing-save-state'
 import { PlayCommandPanel } from './components/play-command-panel'
 import { PlayStatusRail } from './components/play-status-rail'
@@ -44,17 +41,11 @@ function PlayScreenView({ saveId }: { saveId: string }) {
     <div className="play-shell">
       <div className="play-frame">
         <main className="play-stage">
-          <div className="play-stage-toolbar">
-            <Button
-              variant="ghost"
-              className={`${playScreenClassNames.secondaryButton} !h-10 !justify-start !px-4`}
-              onClick={() => navigate('/')}
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back
-            </Button>
-          </div>
-          <PlayTerminalFeed isLoading={snapshotQuery.isLoading} transcript={transcript} />
+          <PlayTerminalFeed
+            isLoading={snapshotQuery.isLoading}
+            transcript={transcript}
+            onNavigateBack={() => navigate('/')}
+          />
           <PlayCommandPanel
             snapshot={snapshotQuery.data}
             snapshotError={snapshotQuery.error}

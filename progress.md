@@ -100,3 +100,19 @@ Original prompt: PLEASE IMPLEMENT THIS PLAN: React Terminal-Style Frontend Migra
     - `cd frontend && node node_modules/playwright/cli.js test tests/e2e/app.spec.ts --workers=1` -> passing
     - `node C:/Users/janhe/.codex/skills/develop-web-game/scripts/web_game_playwright_client.js --url http://127.0.0.1:5173 --click-selector 'text=Create Save And Enter' --actions-file output/terminal-divider-actions.json --iterations 1 --pause-ms 1500 --screenshot-dir output/action-log-shell-check` -> passing
     - Captured browser artifacts at `output/action-log-shell-check/shot-0.png` and `output/action-log-shell-check/state-0.json`
+- Play-screen terminal-panel navigation update:
+  - Corrected the earlier placement and moved the `Back` navigation control out of the command row and into the terminal/messages panel itself, pinned in the panel header above the transcript.
+  - Threaded the navigate callback into `PlayTerminalFeed`, restored the command row to input-plus-submit only, and updated the play-screen test to assert the `Back` button lives inside the terminal panel.
+  - Verification completed:
+    - `cd frontend && node node_modules/vitest/vitest.mjs run src/__tests__/play-screen.test.tsx` -> passing
+    - `cd frontend && node node_modules/vite/bin/vite.js build --emptyOutDir` -> passing
+    - `cd frontend && node node_modules/playwright/cli.js test tests/e2e/app.spec.ts --workers=1` -> passing
+    - `node C:/Users/janhe/.codex/skills/develop-web-game/scripts/web_game_playwright_client.js --url http://127.0.0.1:5173 --click-selector 'text=Create Save And Enter' --actions-file output/terminal-divider-actions.json --iterations 1 --pause-ms 1500 --screenshot-dir output/play-back-button-terminal-check` -> passing
+    - Captured browser artifacts at `output/play-back-button-terminal-check/shot-0.png` and `output/play-back-button-terminal-check/state-0.json`
+- Play-screen command panel height fix:
+  - Reduced the command panel back to auto height by changing the play-stage desktop grid from the old three-row `auto / fill / auto` template to the current two-row `fill / auto` template that matches the actual component structure.
+  - Verification completed:
+    - `cd frontend && node node_modules/vite/bin/vite.js build --emptyOutDir` -> passing
+    - `cd frontend && node node_modules/playwright/cli.js test tests/e2e/app.spec.ts --workers=1` -> passing
+    - `node C:/Users/janhe/.codex/skills/develop-web-game/scripts/web_game_playwright_client.js --url http://127.0.0.1:5173 --click-selector 'text=Create Save And Enter' --actions-file output/terminal-divider-actions.json --iterations 1 --pause-ms 1500 --screenshot-dir output/play-command-height-check` -> passing
+    - Captured browser artifacts at `output/play-command-height-check/shot-0.png` and `output/play-command-height-check/state-0.json`

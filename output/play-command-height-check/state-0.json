@@ -1,0 +1,27 @@
+{
+  "saveId": "save-0f22b3ae9782",
+  "location": "Oakheart Village",
+  "actionPoints": 100,
+  "activeEncounter": null,
+  "pendingProposal": null,
+  "transcriptTail": [
+    {
+      "id": "0f0e8b37a06a",
+      "kind": "system",
+      "title": "Oakheart Village",
+      "content": "1365-04-14 08:00:00"
+    },
+    {
+      "id": "f703b16b8ea1",
+      "kind": "narration",
+      "title": null,
+      "content": "A timber village built around a broad ancient oak."
+    },
+    {
+      "id": "ac17a74bc2c8",
+      "kind": "message",
+      "title": null,
+      "content": "Nearby: Mayor Elira, Ranger Tomas, Smith Brenna\nRoutes: Ruined Watchtower\nAction Points: 100/100"
+    }
+  ]
+}
