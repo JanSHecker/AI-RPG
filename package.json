@@ -1,0 +1,15 @@
+{
+  "name": "ai-rpg",
+  "private": true,
+  "scripts": {
+    "install:all": "node ./scripts/frontend.mjs install && node ./scripts/backend.mjs install",
+    "install:frontend": "node ./scripts/frontend.mjs install",
+    "install:backend": "node ./scripts/backend.mjs install",
+    "dev": "node ./scripts/dev.mjs",
+    "dev:frontend": "node ./scripts/frontend.mjs dev",
+    "dev:backend": "node ./scripts/backend.mjs dev",
+    "build": "node ./scripts/frontend.mjs build",
+    "test": "node ./scripts/frontend.mjs test",
+    "lint": "node ./scripts/frontend.mjs lint"
+  }
+}

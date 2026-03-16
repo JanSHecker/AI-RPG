@@ -1,0 +1,102 @@
+Original prompt: PLEASE IMPLEMENT THIS PLAN: React Terminal-Style Frontend Migration with a FastAPI backend, React + TypeScript SPA, Tailwind/shadcn-style terminal UI, full replacement web flow, and corresponding tests.
+
+## Progress
+
+- Confirmed the repo is currently Python-first with a Typer/Rich CLI and no existing web stack.
+- Read the `develop-web-game` skill and reused the relevant workflow pieces for a browser-based iteration path; canvas-specific instructions do not apply cleanly to this non-canvas UI migration.
+- Identified the main technical seam: `pending_proposal` currently lives in-memory inside `PlayLoop`, while combat state is already persisted and can be derived from combat tables.
+- Verified that the codebase is already in a dirty state; implementation must build on top of existing local edits instead of resetting files.
+- Reworked the landing page into a minimal black-and-cyan layout with a left sidebar for `New Game`, `Load Game`, and `Create Scenario`.
+- Removed the frontpage tech-stack callouts and migration-heavy copy, and shifted the boot flow into section-based panels instead of stacked cards/dialogs.
+- Added boot-screen-specific styling so the frontpage reads flatter and sharper without forcing the whole play screen into the same layout.
+- Redesigned the play page to match the home page principles: black background, cyan linework, flatter edges, and a three-zone layout with left rail, central feed, and right-side world/status panels.
+
+## Current TODOs
+
+- Investigate the remaining Playwright host-library issue on this machine (`libnspr4.so` missing for Chromium headless).
+
+## Notes
+
+- Web API will keep proposal state stateless by round-tripping the proposal payload from the client.
+- Active combat should be derived from persisted encounters/combatants, not kept in browser memory.
+- Implemented a shared `TurnService`, a reusable `GameRuntime`, a FastAPI app under `backend/src/ai_rpg/web`, and a Vite/React frontend under `frontend/`.
+- The app now assumes a real provider-backed LLM path; there is no runtime fake adapter fallback anymore.
+- Verification completed:
+  - `python3 -m pytest -s -q` -> passing
+  - `cd frontend && npm run test` -> passing
+  - `cd frontend && npm run build` -> passing
+  - `cd frontend && npx playwright test` -> blocked by missing system library `libnspr4.so` for the Playwright Chromium binary
+- Frontpage refresh verification:
+  - `cd frontend && npm run test` -> passing
+  - `cd frontend && npm run build` -> passing
+  - `cd frontend && npm run lint` -> still blocked by pre-existing issues in `frontend/src/components/ui/button.tsx` and `frontend/src/routes/play-screen.tsx`
+  - `node /mnt/c/Users/janhe/.codex/skills/develop-web-game/scripts/web_game_playwright_client.js ...` -> still blocked by missing `libnspr4.so`
+  - Fallback visual check completed with Windows Chrome headless screenshot at `output/frontpage-home.png`
+- Play-page refresh verification:
+  - `npm run install:frontend` -> passing after cleaning the mixed frontend `node_modules` state left by the earlier package-manager collision
+  - `npm run test` -> passing
+  - `npm run build` -> passing
+  - `node /mnt/c/Users/janhe/.codex/skills/develop-web-game/scripts/web_game_playwright_client.js ...` -> still blocked by missing `libnspr4.so`
+  - Fallback screenshot captured at `output/play-page-home.png`
+  - Live play-route data is currently blocked by an existing SQLite schema mismatch (`entity_stats.action_points` missing), so the screenshot verifies the redesigned shell but not a fully hydrated session
+- Backend refactor verification:
+  - `npm run install:all` now succeeds from Windows after removing the stale frontend `file:..` dependency and switching frontend install to `corepack pnpm`.
+  - `node ./scripts/backend.mjs dev` still boots correctly after the backend move to `backend/`.
+- Create-game verification:
+  - Ran the `develop-web-game` Playwright client from Windows against `http://127.0.0.1:5173` and confirmed `Create Save And Enter` reaches the play screen with a valid `render_game_to_text` payload.
+  - Captured visual confirmation at `output/web-game-create/shot-0.png` showing the play screen in Oakheart Village.
+  - Confirmed backend requests for `/api/bootstrap`, `POST /api/saves`, and `GET /api/saves/:id` succeed during the create-save flow.
+  - Tightened `frontend/tests/e2e/app.spec.ts` to assert tab content precisely (`Inventory: empty`, exact `Ruined Watchtower`) so the real e2e flow no longer fails on strict-mode locator collisions.
+  - `cd frontend && npx playwright test tests/e2e/app.spec.ts --workers=1` -> passing on Windows with the app running.
+- Fake LLM removal:
+  - Removed the runtime fake adapter, the `AI_RPG_USE_FAKE_LLM` setting, and the `--real-llm` dev-script toggle. The app now always uses the configured provider-backed adapter at runtime.
+  - Added `.env` loading in `backend/src/ai_rpg/core/config.py` so direct Python runs and `npm run dev:backend` both pick up provider settings from the repo root `.env`.
+  - Updated Playwright coverage so it still passes when no API key is configured by verifying the missing-key warning path before attempting freeform actions.
+  - Verification completed:
+    - `cd backend && python3 -m pytest -s -q` -> passing
+    - `node .../web_game_playwright_client.js --url http://127.0.0.1:5173 ...` -> passing create-save flow
+    - `cd frontend && npx playwright test tests/e2e/app.spec.ts --workers=1` -> passing
+
+- Play-screen refactor:
+  - Moved the route implementation into `frontend/src/routes/play-screen/` and kept `frontend/src/routes/play-screen.tsx` as a thin export so router imports stay stable.
+  - Split the page into focused hooks for transcript persistence, proposal persistence, runtime diagnostics, and turn mutation handling.
+  - Split the UI into single-purpose panels/components for the sidebar, command line, transcript feed, status rail, and world tabs.
+  - Verification completed:
+    - `cd frontend && node node_modules/typescript/bin/tsc -b` -> passing
+    - `cd frontend && node node_modules/eslint/bin/eslint.js .` -> failing only on the pre-existing `frontend/src/components/ui/button.tsx` fast-refresh rule
+    - `cd frontend && node node_modules/vitest/vitest.mjs run` -> blocked by missing optional native dependency `@rollup/rollup-win32-x64-msvc` in the current Windows install
+    - `cd frontend && node node_modules/vite/bin/vite.js build` -> blocked by missing optional native dependency `@rolldown/binding-win32-x64-msvc` in the current Windows install
+    - `node .../web_game_playwright_client.js --url http://127.0.0.1:5173/play/save-279082d1ba4c --actions-file output/play-screen-actions.json ...` -> passing against the already running local app
+    - Captured browser artifacts at `output/play-screen-refactor/shot-0.png` and `output/play-screen-refactor/state-0.json`
+- Play-screen layout refinement:
+  - Removed the left sidebar from the play route, kept a compact top-left `Back` button, and widened the center stage into a two-column `stage | rail` layout.
+  - Converted the right rail into a desktop `auto / auto / fill` stack and made `World Panels` the stretch section with internal scrollable tab content.
+  - Added layout test coverage for the missing sidebar content and the stretch rail/world-panel markers.
+  - Tightened the desktop frame height after screenshot review so the command line remains visible in-viewport while `World Panels` still reaches the bottom edge.
+  - Verification completed:
+    - `cd frontend && node node_modules/vitest/vitest.mjs run` -> passing after installing the missing optional Windows native packages with `npm install --no-save @rollup/rollup-win32-x64-msvc @rolldown/binding-win32-x64-msvc`
+    - `cd frontend && node node_modules/vite/bin/vite.js build --emptyOutDir` -> passing
+    - `node C:/Users/janhe/.codex/skills/develop-web-game/scripts/web_game_playwright_client.js --url http://127.0.0.1:8001/play/save-2057d233d8d6 --actions-file output/play-screen-actions.json ...` -> passing against a clean backend started on port `8001`
+    - Captured final browser artifacts at `output/play-layout-check-final/shot-0.png` and `output/play-layout-check-final/state-0.json`
+  - Notes:
+    - The long-running local backend already on port `8000` still returns a pre-existing 500 for some save snapshots; visual verification used a clean SQLite DB on port `8001` instead.
+- Terminal transcript divider refresh:
+  - Switched the play-screen transcript from boxed `play-entry` cards to divider-separated `play-terminal-entry` rows scoped to the terminal feed, so the right-rail panels keep their boxed treatment.
+  - Restored the freeform command placeholder text in the play command input so the existing unit/e2e tests and the UI match again.
+  - Updated the Playwright e2e spec to current play-screen markers (`placeholder`, `Combat Monitor`, variable combat transcript) so it verifies the refactored UI instead of stale labels.
+  - Verification completed:
+    - `cd frontend && node node_modules/vitest/vitest.mjs run src/__tests__/play-screen.test.tsx` -> passing
+    - `cd frontend && node node_modules/vite/bin/vite.js build --emptyOutDir` -> passing
+    - `node C:/Users/janhe/.codex/skills/develop-web-game/scripts/web_game_playwright_client.js --url http://127.0.0.1:5173 --click-selector 'text=Create Save And Enter' --actions-file output/terminal-divider-actions.json --iterations 1 --pause-ms 1500 --screenshot-dir output/terminal-divider-check` -> passing
+    - `cd frontend && node node_modules/playwright/cli.js test tests/e2e/app.spec.ts --workers=1` -> passing
+    - Captured browser artifacts at `output/terminal-divider-check/shot-0.png` and `output/terminal-divider-check/state-0.json`
+- Action log consolidation:
+  - Changed the play transcript so pending proposals stay out of the terminal log and only resolved actions are written as a single `Action` entry.
+  - Confirmed actions now render the original input as the main line and expose the matched proposal details behind a collapsible `Proposed action details` section; confirm/cancel echo lines are no longer logged.
+  - Added transcript normalization on load so older session-stored `Input -> Proposed Action -> confirm` sequences collapse into the new single action item format automatically.
+  - Verification completed:
+    - `cd frontend && node node_modules/vitest/vitest.mjs run src/__tests__/play-screen.test.tsx` -> passing
+    - `cd frontend && node node_modules/vite/bin/vite.js build --emptyOutDir` -> passing
+    - `cd frontend && node node_modules/playwright/cli.js test tests/e2e/app.spec.ts --workers=1` -> passing
+    - `node C:/Users/janhe/.codex/skills/develop-web-game/scripts/web_game_playwright_client.js --url http://127.0.0.1:5173 --click-selector 'text=Create Save And Enter' --actions-file output/terminal-divider-actions.json --iterations 1 --pause-ms 1500 --screenshot-dir output/action-log-shell-check` -> passing
+    - Captured browser artifacts at `output/action-log-shell-check/shot-0.png` and `output/action-log-shell-check/state-0.json`

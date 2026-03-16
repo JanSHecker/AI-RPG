@@ -1,0 +1,428 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --background: 0 0% 0%;
+    --foreground: 192 100% 92%;
+    --panel: 0 0% 3%;
+    --panel-foreground: 191 85% 92%;
+    --accent: 188 96% 60%;
+    --accent-soft: 189 100% 10%;
+    --border: 189 100% 20%;
+    --muted: 192 39% 71%;
+    --danger: 0 82% 65%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply bg-background;
+  }
+
+  body {
+    @apply min-h-screen bg-background text-foreground antialiased;
+    font-family: 'IBM Plex Mono', 'JetBrains Mono', 'Courier Prime', monospace;
+    background-image:
+      radial-gradient(circle at top left, rgba(34, 211, 238, 0.08), transparent 24%),
+      linear-gradient(180deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.98));
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(
+        180deg,
+        rgba(34, 211, 238, 0.08) 0,
+        rgba(34, 211, 238, 0.08) 1px,
+        transparent 1px,
+        transparent 96px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(34, 211, 238, 0.05) 0,
+        rgba(34, 211, 238, 0.05) 1px,
+        transparent 1px,
+        transparent 128px
+      );
+    opacity: 0.4;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at center, transparent 35%, rgba(0, 0, 0, 0.7) 100%);
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+
+  ::selection {
+    background: rgba(64, 224, 255, 0.26);
+    color: white;
+  }
+}
+
+@layer components {
+  .boot-shell {
+    @apply relative min-h-screen overflow-hidden bg-black;
+  }
+
+  .boot-shell::before {
+    content: '';
+    position: absolute;
+    inset: 16px;
+    border: 1px solid hsl(var(--accent) / 0.18);
+    pointer-events: none;
+  }
+
+  .boot-frame {
+    @apply relative z-10 mx-auto grid min-h-screen max-w-[1560px] gap-5 px-4 py-4 lg:grid-cols-[260px_minmax(0,1fr)] lg:px-8 lg:py-8;
+  }
+
+  .boot-sidebar {
+    @apply flex flex-col justify-between border border-accent/30 bg-black/90 p-5;
+    box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.05);
+  }
+
+  .boot-kicker {
+    @apply text-[11px] uppercase tracking-[0.32em] text-accent;
+  }
+
+  .boot-title {
+    @apply mt-4 font-display text-4xl uppercase tracking-[0.16em] text-foreground;
+  }
+
+  .boot-copy {
+    @apply mt-4 max-w-2xl text-sm leading-7 text-muted;
+  }
+
+  .boot-nav {
+    @apply mt-10 space-y-2;
+  }
+
+  .boot-nav-button {
+    @apply flex w-full items-center justify-between gap-4 border border-accent/20 bg-transparent px-4 py-4 text-left text-sm uppercase tracking-[0.26em] text-foreground transition;
+  }
+
+  .boot-nav-button[data-active='true'] {
+    @apply border-accent/70 bg-accent/10;
+    box-shadow: inset 3px 0 0 rgba(34, 211, 238, 0.8);
+  }
+
+  .boot-nav-button:hover {
+    @apply border-accent/45 text-accent;
+  }
+
+  .boot-nav-meta {
+    @apply text-[10px] tracking-[0.24em] text-muted;
+  }
+
+  .boot-sidebar-summary {
+    @apply space-y-3 border-t border-accent/20 pt-5;
+  }
+
+  .boot-sidebar-stat {
+    @apply flex items-center justify-between text-[11px] uppercase tracking-[0.28em] text-muted;
+  }
+
+  .boot-sidebar-stat strong {
+    @apply text-base text-accent;
+  }
+
+  .boot-panel {
+    @apply border border-accent/30 bg-black/85;
+    box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.05);
+  }
+
+  .boot-panel-header {
+    @apply border-b border-accent/20 px-6 py-6 md:px-8;
+  }
+
+  .boot-section-title {
+    @apply mt-4 font-display text-3xl uppercase tracking-[0.16em] text-foreground md:text-5xl;
+  }
+
+  .boot-panel-body {
+    @apply space-y-4 px-6 py-6 md:px-8 md:py-8;
+  }
+
+  .boot-block {
+    @apply border border-accent/20 bg-black/80 p-5;
+  }
+
+  .boot-block-header {
+    @apply mb-4 flex items-center justify-between gap-4 border-b border-accent/20 pb-4 text-[11px] uppercase tracking-[0.28em] text-muted;
+  }
+
+  .boot-list-item {
+    @apply w-full border border-accent/20 bg-black/85 p-4 text-left transition;
+  }
+
+  .boot-list-item[data-active='true'] {
+    @apply border-accent/70 bg-accent/10;
+  }
+
+  .boot-list-item:hover {
+    @apply border-accent/45;
+  }
+
+  .boot-item-title {
+    @apply text-base uppercase tracking-[0.18em] text-foreground;
+  }
+
+  .boot-chip {
+    @apply whitespace-nowrap border border-accent/25 px-2 py-1 text-[10px] uppercase tracking-[0.22em] text-accent;
+  }
+
+  .boot-selection {
+    @apply border border-accent/25 bg-black/80 p-4;
+  }
+
+  .boot-empty {
+    @apply border border-dashed border-accent/25 bg-black/70 px-4 py-5 text-sm text-muted;
+  }
+
+  .play-shell {
+    @apply relative min-h-screen overflow-hidden bg-black;
+  }
+
+  .play-shell::before {
+    content: '';
+    position: absolute;
+    inset: 16px;
+    border: 1px solid hsl(var(--accent) / 0.18);
+    pointer-events: none;
+  }
+
+  .play-frame {
+    @apply relative z-10 mx-auto grid min-h-screen max-w-[1700px] gap-5 px-4 py-4 xl:h-screen xl:min-h-0 xl:grid-cols-[minmax(0,1.8fr)_minmax(320px,0.82fr)] xl:overflow-hidden xl:px-8 xl:py-8;
+  }
+
+  .play-stage {
+    @apply grid gap-5 xl:min-h-0 xl:grid-rows-[auto_minmax(0,1fr)_auto] xl:overflow-hidden;
+  }
+
+  .play-rail {
+    @apply grid gap-5 xl:min-h-0 xl:overflow-hidden;
+  }
+
+  .play-rail-stretch {
+    @apply xl:min-h-0 xl:grid-rows-[auto_auto_minmax(0,1fr)];
+  }
+
+  .play-stage-toolbar {
+    @apply flex items-center;
+  }
+
+  .play-section {
+    @apply border border-accent/30 bg-black/85;
+    box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.05);
+  }
+
+  .play-section-fill {
+    @apply xl:flex xl:min-h-0 xl:flex-col;
+  }
+
+  .play-world-panel {
+    @apply xl:row-start-3;
+  }
+
+  .play-section-header {
+    @apply border-b border-accent/20 px-5 py-4;
+  }
+
+  .play-section-body {
+    @apply p-5;
+  }
+
+  .play-section-body-fill {
+    @apply xl:flex-1 xl:min-h-0;
+  }
+
+  .play-section-title {
+    @apply text-[11px] uppercase tracking-[0.32em] text-accent;
+  }
+
+  .play-section-copy {
+    @apply mt-2 text-sm leading-6 text-muted;
+  }
+
+  .play-meta-label {
+    @apply text-[11px] uppercase tracking-[0.3em] text-muted;
+  }
+
+  .play-meta-value {
+    @apply mt-2 text-base uppercase tracking-[0.14em] text-foreground;
+  }
+
+  .play-chip {
+    @apply inline-flex items-center border px-2 py-1 text-[10px] uppercase tracking-[0.24em];
+  }
+
+  .play-chip[data-variant='default'] {
+    @apply border-accent/40 bg-accent/10 text-accent;
+  }
+
+  .play-chip[data-variant='muted'] {
+    @apply border-accent/20 bg-black/70 text-muted;
+  }
+
+  .play-chip[data-variant='danger'] {
+    @apply border-danger/40 bg-danger/10 text-danger;
+  }
+
+  .play-entry {
+    @apply border border-accent/20 bg-black/75 p-4 text-sm leading-7 text-foreground/90;
+  }
+
+  .play-entry[data-kind='input'] {
+    @apply border-accent/45 bg-accent/10 text-accent;
+  }
+
+  .play-entry[data-kind='narration'] {
+    @apply text-foreground;
+  }
+
+  .play-entry[data-kind='message'] {
+    @apply text-muted;
+  }
+
+  .play-entry[data-kind='panel'] {
+    @apply border-accent/30 bg-black/85;
+  }
+
+  .play-entry-title {
+    @apply mb-2 text-[11px] uppercase tracking-[0.32em] text-accent;
+  }
+
+  .play-terminal-feed {
+    @apply divide-y divide-accent/20;
+  }
+
+  .play-terminal-entry {
+    @apply py-4 text-sm leading-7 text-foreground/90;
+  }
+
+  .play-terminal-entry[data-kind='input'] {
+    @apply text-accent;
+  }
+
+  .play-terminal-entry[data-kind='narration'] {
+    @apply text-foreground;
+  }
+
+  .play-terminal-entry[data-kind='message'] {
+    @apply text-muted;
+  }
+
+  .play-terminal-details {
+    @apply mt-3 border-t border-accent/20 pt-3 text-muted;
+  }
+
+  .play-terminal-details-toggle {
+    @apply cursor-pointer text-[11px] uppercase tracking-[0.28em] text-accent/80;
+    list-style: none;
+  }
+
+  .play-terminal-details-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .play-terminal-details-toggle::before {
+    content: '+ ';
+  }
+
+  .play-terminal-details[open] .play-terminal-details-toggle::before {
+    content: '- ';
+  }
+
+  .play-terminal-details-body {
+    @apply mt-3 whitespace-pre-wrap break-words text-inherit;
+    font: inherit;
+  }
+
+  .play-callout {
+    @apply border border-accent/35 bg-accent/10 p-4 text-sm leading-7 text-foreground;
+  }
+
+  .play-stat {
+    @apply space-y-2;
+  }
+
+  .play-stat-header {
+    @apply flex items-center justify-between text-xs uppercase tracking-[0.26em] text-muted;
+  }
+
+  .play-meter-track {
+    @apply h-2 border border-accent/20 bg-black/70;
+  }
+
+  .play-meter-fill {
+    @apply h-full bg-accent/80 transition-[width];
+  }
+
+  .play-inline-stat {
+    @apply text-xs uppercase tracking-[0.24em] text-muted;
+  }
+
+  .terminal-shell {
+    @apply relative mx-auto min-h-screen max-w-[1500px] px-4 py-5 md:px-6 lg:px-8;
+  }
+
+  .terminal-header {
+    @apply animate-rise rounded-2xl border border-border bg-panel/80 p-4 shadow-[0_0_0_1px_rgba(77,214,255,0.08),0_24px_60px_rgba(0,0,0,0.35)];
+    backdrop-filter: blur(18px);
+  }
+
+  .terminal-grid {
+    @apply mt-4 grid gap-4 lg:grid-cols-[minmax(0,1.7fr)_minmax(320px,0.95fr)];
+  }
+
+  .screen-panel {
+    @apply animate-rise rounded-2xl border border-border bg-panel/85 shadow-[0_0_0_1px_rgba(77,214,255,0.06),0_18px_38px_rgba(0,0,0,0.28)];
+    backdrop-filter: blur(18px);
+  }
+
+  .terminal-entry {
+    @apply rounded-xl border border-border/70 bg-background/50 p-3 text-sm leading-6 text-foreground/90;
+  }
+
+  .terminal-entry[data-kind='input'] {
+    @apply border-accent/50 bg-accent-soft/40 text-accent;
+  }
+
+  .terminal-entry[data-kind='narration'] {
+    @apply text-foreground;
+  }
+
+  .terminal-entry[data-kind='message'] {
+    @apply text-muted;
+  }
+
+  .terminal-entry[data-kind='panel'] {
+    @apply border-accent/35 bg-panel/90;
+  }
+
+  .terminal-entry-title {
+    @apply mb-2 text-[11px] uppercase tracking-[0.32em] text-accent;
+  }
+
+  .status-kicker {
+    @apply text-[11px] uppercase tracking-[0.32em] text-accent;
+  }
+
+  .status-value {
+    @apply mt-2 text-lg text-foreground;
+  }
+}

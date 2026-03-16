@@ -1,0 +1,95 @@
+[2m23:37:53[22m [31m[1m[vite][22m[39m [31mInternal server error: [postcss] D:/Programmierprojekte/AI-RPG/frontend/src/index.css:351:5: The `font-inherit` class does not exist. If `font-inherit` is a custom class, make sure it is defined within a `@layer` directive.[39m
+  Plugin: [35mvite:css[39m
+  File: [36mD:/Programmierprojekte/AI-RPG/frontend/src/index.css[39m:351:4
+[33m  349 |  
+  350 |    .play-terminal-details-body {
+  351 |      @apply mt-3 whitespace-pre-wrap break-words font-inherit text-inherit;
+      |      ^
+  352 |    }
+  353 |  [39m
+      at Input.error (D:\Programmierprojekte\AI-RPG\frontend\node_modules\postcss\lib\input.js:135:16)
+      at AtRule.error (D:\Programmierprojekte\AI-RPG\frontend\node_modules\postcss\lib\node.js:146:32)
+      at processApply (D:\Programmierprojekte\AI-RPG\frontend\node_modules\tailwindcss\lib\lib\expandApplyAtRules.js:380:29)
+      at D:\Programmierprojekte\AI-RPG\frontend\node_modules\tailwindcss\lib\lib\expandApplyAtRules.js:551:9
+      at D:\Programmierprojekte\AI-RPG\frontend\node_modules\tailwindcss\lib\processTailwindFeatures.js:55:50
+      at async plugins (D:\Programmierprojekte\AI-RPG\frontend\node_modules\tailwindcss\lib\plugin.js:38:17)
+      at async LazyResult.runAsync (D:\Programmierprojekte\AI-RPG\frontend\node_modules\postcss\lib\lazy-result.js:293:11)
+      at async runPostCSS (file:///D:/Programmierprojekte/AI-RPG/frontend/node_modules/vite/dist/node/chunks/node.js:20913:19)
+      at async compilePostCSS (file:///D:/Programmierprojekte/AI-RPG/frontend/node_modules/vite/dist/node/chunks/node.js:20897:6)
+      at async compileCSS (file:///D:/Programmierprojekte/AI-RPG/frontend/node_modules/vite/dist/node/chunks/node.js:20827:26)
+[2m23:38:14[22m [31m[1m[vite][22m[39m [31mInternal server error: [postcss] D:/Programmierprojekte/AI-RPG/frontend/src/index.css:351:5: The `font-inherit` class does not exist. If `font-inherit` is a custom class, make sure it is defined within a `@layer` directive.[39m
+  Plugin: [35mvite:css[39m
+  File: [36mD:/Programmierprojekte/AI-RPG/frontend/src/index.css[39m:351:4
+[33m  349 |  
+  350 |    .play-terminal-details-body {
+  351 |      @apply mt-3 whitespace-pre-wrap break-words font-inherit text-inherit;
+      |      ^
+  352 |    }
+  353 |  [39m
+      at Input.error (D:\Programmierprojekte\AI-RPG\frontend\node_modules\postcss\lib\input.js:135:16)
+      at AtRule.error (D:\Programmierprojekte\AI-RPG\frontend\node_modules\postcss\lib\node.js:146:32)
+      at processApply (D:\Programmierprojekte\AI-RPG\frontend\node_modules\tailwindcss\lib\lib\expandApplyAtRules.js:380:29)
+      at D:\Programmierprojekte\AI-RPG\frontend\node_modules\tailwindcss\lib\lib\expandApplyAtRules.js:551:9
+      at D:\Programmierprojekte\AI-RPG\frontend\node_modules\tailwindcss\lib\processTailwindFeatures.js:55:50
+      at async plugins (D:\Programmierprojekte\AI-RPG\frontend\node_modules\tailwindcss\lib\plugin.js:38:17)
+      at async LazyResult.runAsync (D:\Programmierprojekte\AI-RPG\frontend\node_modules\postcss\lib\lazy-result.js:293:11)
+      at async runPostCSS (file:///D:/Programmierprojekte/AI-RPG/frontend/node_modules/vite/dist/node/chunks/node.js:20913:19)
+      at async compilePostCSS (file:///D:/Programmierprojekte/AI-RPG/frontend/node_modules/vite/dist/node/chunks/node.js:20897:6)
+      at async compileCSS (file:///D:/Programmierprojekte/AI-RPG/frontend/node_modules/vite/dist/node/chunks/node.js:20827:26)
+[2m23:39:27[22m [31m[1m[vite][22m[39m [31mInternal server error: [postcss] D:/Programmierprojekte/AI-RPG/frontend/src/index.css:351:5: The `font-inherit` class does not exist. If `font-inherit` is a custom class, make sure it is defined within a `@layer` directive.[39m
+  Plugin: [35mvite:css[39m
+  File: [36mD:/Programmierprojekte/AI-RPG/frontend/src/index.css[39m:351:4
+[33m  349 |  
+  350 |    .play-terminal-details-body {
+  351 |      @apply mt-3 whitespace-pre-wrap break-words font-inherit text-inherit;
+      |      ^
+  352 |    }
+  353 |  [39m
+      at Input.error (D:\Programmierprojekte\AI-RPG\frontend\node_modules\postcss\lib\input.js:135:16)
+      at AtRule.error (D:\Programmierprojekte\AI-RPG\frontend\node_modules\postcss\lib\node.js:146:32)
+      at processApply (D:\Programmierprojekte\AI-RPG\frontend\node_modules\tailwindcss\lib\lib\expandApplyAtRules.js:380:29)
+      at D:\Programmierprojekte\AI-RPG\frontend\node_modules\tailwindcss\lib\lib\expandApplyAtRules.js:551:9
+      at D:\Programmierprojekte\AI-RPG\frontend\node_modules\tailwindcss\lib\processTailwindFeatures.js:55:50
+      at async plugins (D:\Programmierprojekte\AI-RPG\frontend\node_modules\tailwindcss\lib\plugin.js:38:17)
+      at async LazyResult.runAsync (D:\Programmierprojekte\AI-RPG\frontend\node_modules\postcss\lib\lazy-result.js:293:11)
+      at async runPostCSS (file:///D:/Programmierprojekte/AI-RPG/frontend/node_modules/vite/dist/node/chunks/node.js:20913:19)
+      at async compilePostCSS (file:///D:/Programmierprojekte/AI-RPG/frontend/node_modules/vite/dist/node/chunks/node.js:20897:6)
+      at async compileCSS (file:///D:/Programmierprojekte/AI-RPG/frontend/node_modules/vite/dist/node/chunks/node.js:20827:26)
+[2m23:39:38[22m [31m[1m[vite][22m[39m [31mInternal server error: [postcss] D:/Programmierprojekte/AI-RPG/frontend/src/index.css:351:5: The `font-inherit` class does not exist. If `font-inherit` is a custom class, make sure it is defined within a `@layer` directive.[39m
+  Plugin: [35mvite:css[39m
+  File: [36mD:/Programmierprojekte/AI-RPG/frontend/src/index.css[39m:351:4
+[33m  349 |  
+  350 |    .play-terminal-details-body {
+  351 |      @apply mt-3 whitespace-pre-wrap break-words font-inherit text-inherit;
+      |      ^
+  352 |    }
+  353 |  [39m
+      at Input.error (D:\Programmierprojekte\AI-RPG\frontend\node_modules\postcss\lib\input.js:135:16)
+      at AtRule.error (D:\Programmierprojekte\AI-RPG\frontend\node_modules\postcss\lib\node.js:146:32)
+      at processApply (D:\Programmierprojekte\AI-RPG\frontend\node_modules\tailwindcss\lib\lib\expandApplyAtRules.js:380:29)
+      at D:\Programmierprojekte\AI-RPG\frontend\node_modules\tailwindcss\lib\lib\expandApplyAtRules.js:551:9
+      at D:\Programmierprojekte\AI-RPG\frontend\node_modules\tailwindcss\lib\processTailwindFeatures.js:55:50
+      at async plugins (D:\Programmierprojekte\AI-RPG\frontend\node_modules\tailwindcss\lib\plugin.js:38:17)
+      at async LazyResult.runAsync (D:\Programmierprojekte\AI-RPG\frontend\node_modules\postcss\lib\lazy-result.js:293:11)
+      at async runPostCSS (file:///D:/Programmierprojekte/AI-RPG/frontend/node_modules/vite/dist/node/chunks/node.js:20913:19)
+      at async compilePostCSS (file:///D:/Programmierprojekte/AI-RPG/frontend/node_modules/vite/dist/node/chunks/node.js:20897:6)
+      at async compileCSS (file:///D:/Programmierprojekte/AI-RPG/frontend/node_modules/vite/dist/node/chunks/node.js:20827:26)
+[2m23:39:48[22m [31m[1m[vite][22m[39m [31mInternal server error: [postcss] D:/Programmierprojekte/AI-RPG/frontend/src/index.css:351:5: The `font-inherit` class does not exist. If `font-inherit` is a custom class, make sure it is defined within a `@layer` directive.[39m
+  Plugin: [35mvite:css[39m
+  File: [36mD:/Programmierprojekte/AI-RPG/frontend/src/index.css[39m:351:4
+[33m  349 |  
+  350 |    .play-terminal-details-body {
+  351 |      @apply mt-3 whitespace-pre-wrap break-words font-inherit text-inherit;
+      |      ^
+  352 |    }
+  353 |  [39m
+      at Input.error (D:\Programmierprojekte\AI-RPG\frontend\node_modules\postcss\lib\input.js:135:16)
+      at AtRule.error (D:\Programmierprojekte\AI-RPG\frontend\node_modules\postcss\lib\node.js:146:32)
+      at processApply (D:\Programmierprojekte\AI-RPG\frontend\node_modules\tailwindcss\lib\lib\expandApplyAtRules.js:380:29)
+      at D:\Programmierprojekte\AI-RPG\frontend\node_modules\tailwindcss\lib\lib\expandApplyAtRules.js:551:9
+      at D:\Programmierprojekte\AI-RPG\frontend\node_modules\tailwindcss\lib\processTailwindFeatures.js:55:50
+      at async plugins (D:\Programmierprojekte\AI-RPG\frontend\node_modules\tailwindcss\lib\plugin.js:38:17)
+      at async LazyResult.runAsync (D:\Programmierprojekte\AI-RPG\frontend\node_modules\postcss\lib\lazy-result.js:293:11)
+      at async runPostCSS (file:///D:/Programmierprojekte/AI-RPG/frontend/node_modules/vite/dist/node/chunks/node.js:20913:19)
+      at async compilePostCSS (file:///D:/Programmierprojekte/AI-RPG/frontend/node_modules/vite/dist/node/chunks/node.js:20897:6)
+      at async compileCSS (file:///D:/Programmierprojekte/AI-RPG/frontend/node_modules/vite/dist/node/chunks/node.js:20827:26)

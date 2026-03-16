@@ -1,0 +1,15 @@
+INFO:     127.0.0.1:49322 - "GET /api/bootstrap HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49322 - "POST /api/saves HTTP/1.1" 201 Created
+INFO:     127.0.0.1:49329 - "GET /api/saves/save-2057d233d8d6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61591 - "GET /play/save-2057d233d8d6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61591 - "GET /assets/index-DxFGwgC7.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51532 - "GET /assets/index-B0tzTNXh.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61591 - "GET /api/saves/save-2057d233d8d6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59922 - "GET /play/save-2057d233d8d6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59922 - "GET /assets/index-CZe1BKSa.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55206 - "GET /assets/index-nWMdrT1P.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59922 - "GET /api/saves/save-2057d233d8d6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52667 - "GET /play/save-2057d233d8d6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52667 - "GET /assets/index-DvaR7haz.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63188 - "GET /assets/index-CAJFpaTx.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52667 - "GET /api/saves/save-2057d233d8d6 HTTP/1.1" 200 OK
